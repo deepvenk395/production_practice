@@ -20,3 +20,13 @@ def ready():
         "status": "ready",
         "service": "fastapi",
     }
+
+
+@app.get("/version")
+def version():
+    return {
+        "version": "0.1.0",
+        "environment": "development",
+    }
+
+
