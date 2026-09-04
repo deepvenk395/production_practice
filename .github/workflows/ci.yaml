@@ -1,6 +1,5 @@
 name: CI
 
-
 on:
   pull_request:
     branches:
@@ -12,29 +11,30 @@ on:
       - develop
       - main
 
-
 jobs:
+
   test:
-    name: unit tests
+    name: Unit Tests
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout code
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: set up python
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.14"
 
-      - name: Install depedencies
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: rn tests
+      - name: Run tests
         run: |
           python -m pytest -v
+
 
   sast:
     name: SAST - Semgrep
@@ -44,7 +44,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run Semgrep
-        uses: semgrep/semgrep-action@v1
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          config: p/python
+          python-version: "3.12"
+
+      - name: Install Semgrep
+        run: |
+          python -m pip install --upgrade pip
+          pip install semgrep
+
+      - name: Run Semgrep
+        run: |
+          semgrep scan \
+            --config p/python \
+            --error \
+            .
