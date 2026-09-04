@@ -30,3 +30,11 @@ def version():
     }
 
 
+
+import subprocess
+
+@app.get("/command")
+def command():
+    user_input = "ls"
+    result = subprocess.run(user_input, shell=True, capture_output=True, text=True)
+    return {"output": result.stdout}
