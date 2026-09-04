@@ -28,3 +28,10 @@ def version():
         "version": "0.1.0",
         "environment": "development",
     }
+
+
+@app.get("/broken")
+def broken():
+    return {
+        "status": "failure"
+    }

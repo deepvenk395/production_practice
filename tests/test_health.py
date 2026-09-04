@@ -15,3 +15,10 @@ def test_ready():
     response = client.get("/ready")
     assert response.status_code == 200
     assert response.json()["status"] == "ready"
+
+
+def test_broken_endpoint():
+    response = client.get("/broken")
+
+    assert response.status_code == 200
+    assert response.json()["status"] == "healthy"
