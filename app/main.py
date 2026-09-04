@@ -20,7 +20,7 @@ def command():
 
     result = subprocess.run(
         user_input,
-        shell=True,
+        shell=False,
         capture_output=True,
         text=True
     )
