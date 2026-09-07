@@ -82,4 +82,4 @@ jobs:
 
       - name: Run SCA
         run: |
-          pip-audit -r requirement.txt
+          pip-audit -r requirements.txt
