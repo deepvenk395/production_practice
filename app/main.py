@@ -1,22 +1,28 @@
 from fastapi import FastAPI
+import subprocess
 
-app = FastAPI(
-    title="Production DevSecOps Platform",
-    version="0.1.0",
-)
+app = FastAPI()
 
 
 @app.get("/health")
 def health():
-    return {
-        "status": "healthy",
-        "service": "fastapi",
-    }
+    return {"status": "healthy"}
 
 
 @app.get("/ready")
 def ready():
-    return {
-        "status": "ready",
-        "service": "fastapi",
-    }
+    return {"status": "ready"}
+
+
+@app.get("/command")
+def command():
+    user_input = "ls"
+
+    result = subprocess.run(
+        user_input,
+        shell=False,
+        capture_output=True,
+        text=True
+    )
+
+    return {"output": result.stdout}
